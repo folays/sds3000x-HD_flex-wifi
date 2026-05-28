@@ -2,6 +2,16 @@
 
 WiFi addon for Siglent SDS3000X-HD oscilloscopes. Adds WiFi connectivity via a USB dongle using the MT7610U chipset (e.g. Panda Wireless PAU0A AC600).
 
+## Download
+
+- **[wifi_addon.zip](https://github.com/folays/sds3000x-HD_flex-wifi/releases/latest/download/wifi_addon.zip)** — built by GitHub Actions CI. Verifiable: the build is attested with [Sigstore](https://www.sigstore.dev/) provenance. Anyone can verify the artifact was produced by the CI, not locally:
+  ```bash
+  gh attestation verify wifi_addon.zip --repo folays/sds3000x-HD_flex-wifi
+  ```
+  Or rebuild from source yourself (`docker build` / `podman build`) and compare SHA256.
+
+- **[FLEX_WIFI.ADS](https://github.com/folays/sds3000x-HD_flex-wifi/releases/latest/download/FLEX_WIFI.ADS)** — the ZIP above wrapped in Siglent's .ADS firmware format, ready to upload to the scope.
+
 ## Why MT7610U?
 
 The SDS3000X-HD runs Linux 5.10 (aarch64). This severely limits the choice of USB WiFi chipsets:
@@ -78,15 +88,17 @@ The build downloads kernel 5.10 source from kernel.org, verifies the scope's ker
 
 ### Create the .ADS firmware package
 
-The ZIP must be wrapped into a .ADS file for the scope to accept it. This step uses a separate tool (not included in this repo).
+The ZIP must be wrapped into a .ADS file for the scope to accept it. Sorry, there is no public tool for this. Pre-built .ADS files are provided in the [releases](https://github.com/folays/sds3000x-HD_flex-wifi/releases).
 
 ### Verify a build
 
-The GitHub Actions CI builds the ZIP on GitHub's infrastructure. The SHA256 of the artifact is logged in the build output. To verify:
+The GitHub Actions CI builds the ZIP on GitHub's infrastructure with [build provenance attestation](https://docs.github.com/en/actions/security-for-github-actions/using-artifact-attestations/using-artifact-attestations-to-establish-provenance-for-builds). To verify that a ZIP was built by the CI:
 
-1. Download the ZIP artifact from GitHub Actions
-2. Decode a .ADS with your own tools, extract the ZIP
-3. Compare SHA256 — match means the .ADS contains exactly what the CI produced
+```bash
+gh attestation verify wifi_addon.zip --repo folays/sds3000x-HD_flex-wifi
+```
+
+Or rebuild from source and compare SHA256.
 
 ## What's inside the ZIP
 

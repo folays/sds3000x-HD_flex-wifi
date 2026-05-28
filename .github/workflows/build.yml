@@ -7,6 +7,11 @@ on:
   pull_request:
     branches: [master]
 
+permissions:
+  id-token: write
+  contents: write
+  attestations: write
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -22,6 +27,11 @@ jobs:
           docker cp "$CID:/wifi_addon.zip" wifi_addon.zip
           docker rm "$CID"
           sha256sum wifi_addon.zip
+
+      - name: Attest build provenance
+        uses: actions/attest-build-provenance@v2
+        with:
+          subject-path: wifi_addon.zip
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
