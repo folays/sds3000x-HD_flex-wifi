@@ -9,7 +9,7 @@ WiFi addon for [Siglent SDS3000X-HD](https://www.siglenteu.com/digital-oscillosc
   2. `gh attestation verify wifi_addon.zip --repo folays/sds3000x-HD_flex-wifi`
   3. Rebuild from source: `docker build` or `podman build`, compare SHA256
 
-- **[FLEX_WIFI.ADS](https://github.com/folays/sds3000x-HD_flex-wifi/releases/latest/download/FLEX_WIFI.ADS)** — the ZIP above wrapped in Siglent's .ADS firmware format, ready to upload to the scope. This file is built offline (not by CI). If you can decode .ADS files, you can extract the ZIP inside and verify its SHA256 matches the CI-built one above.
+- **[FLEX-WIFI.ADS](https://github.com/folays/sds3000x-HD_flex-wifi/releases/latest/download/FLEX-WIFI.ADS)** — the ZIP above wrapped in Siglent's .ADS firmware format, ready to upload to the scope. This file is built offline (not by CI). If you can decode .ADS files, you can extract the ZIP inside and verify its SHA256 matches the CI-built one above.
 
 ## Why MT7610U?
 
