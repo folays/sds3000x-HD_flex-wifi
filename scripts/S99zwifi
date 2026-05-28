@@ -1,0 +1,23 @@
+#!/bin/sh
+#
+# flex-wifi: load WiFi modules if a compatible dongle is plugged
+#
+
+FLEX_DIR=/usr/bin/siglent/usr/flex-wifi
+
+start() {
+    # Check if any supported USB device is plugged (patterns auto-generated from .ko modules)
+    if [ -f $FLEX_DIR/modinfo_aliases.txt ] && grep -rqsF -f $FLEX_DIR/modinfo_aliases.txt /sys/bus/usb/devices/*/modalias 2>/dev/null; then
+        if [ -x /usr/bin/siglent/usr/flex-wifi/setup.sh ]; then
+            /usr/bin/siglent/usr/flex-wifi/setup.sh
+        fi
+    fi
+}
+
+case "$1" in
+  start)
+    start
+    ;;
+  *)
+    ;;
+esac
