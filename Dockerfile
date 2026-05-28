@@ -1,6 +1,10 @@
 FROM --platform=linux/amd64 ubuntu:20.04
 
 ENV DEBIAN_FRONTEND=noninteractive
+ENV SOURCE_DATE_EPOCH=1748403000
+ENV KBUILD_BUILD_TIMESTAMP="Wed May 28 03:30:00 UTC 2026"
+ENV KBUILD_BUILD_USER=build
+ENV KBUILD_BUILD_HOST=reproducible
 
 RUN apt-get update && apt-get install -y \
     gcc-8-aarch64-linux-gnu \
@@ -130,7 +134,8 @@ RUN cp /output/scripts/*.sh /output/ && \
 RUN modinfo /output/mt76x0u.ko | grep -E "vermagic|filename"
 
 # Create ZIP
-RUN cd /output && zip -X --symlinks -r /wifi_addon.zip . && \
+RUN find /output -exec touch -h -t 202605280330.00 {} + && \
+    cd /output && find . -type f -o -type l | sort | zip -X --symlinks /wifi_addon.zip -@ && \
     sha256sum /wifi_addon.zip && \
     echo "=== ZIP contents ===" && \
     unzip -l /wifi_addon.zip
