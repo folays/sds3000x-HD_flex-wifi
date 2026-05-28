@@ -5,8 +5,8 @@ WiFi addon for [Siglent SDS3000X-HD](https://www.siglenteu.com/digital-oscillosc
 ## Download
 
 - **[wifi_addon.zip](https://github.com/folays/sds3000x-HD_flex-wifi/releases/latest/download/wifi_addon.zip)** — built by GitHub Actions CI (not locally). Three ways to verify:
-  1. `sha256sum wifi_addon.zip` and compare with the [CI build log](https://github.com/folays/sds3000x-HD_flex-wifi/actions)
-  2. `gh attestation verify wifi_addon.zip --repo folays/sds3000x-HD_flex-wifi` (GitHub's cryptographic build attestation)
+  1. `sha256sum wifi_addon.zip` and compare with the attestation digest: go to [Actions](https://github.com/folays/sds3000x-HD_flex-wifi/actions) → click the latest workflow run → click "Attestation Created" → scroll to the bottom, the SHA256 is under "Subject digest" next to `wifi_addon.zip` (don't confuse with the `wifi_addon_artifact` shown on the run page — that's a wrapper ZIP with a different hash)
+  2. `gh attestation verify wifi_addon.zip --repo folays/sds3000x-HD_flex-wifi`
   3. Rebuild from source: `docker build` or `podman build`, compare SHA256
 
 - **[FLEX_WIFI.ADS](https://github.com/folays/sds3000x-HD_flex-wifi/releases/latest/download/FLEX_WIFI.ADS)** — the ZIP above wrapped in Siglent's .ADS firmware format, ready to upload to the scope. This file is built offline (not by CI). If you can decode .ADS files, you can extract the ZIP inside and verify its SHA256 matches the CI-built one above.

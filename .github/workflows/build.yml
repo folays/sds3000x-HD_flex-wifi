@@ -16,7 +16,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
       - name: Build
         run: docker build -t flex-wifi-builder .
@@ -29,14 +29,14 @@ jobs:
           sha256sum wifi_addon.zip
 
       - name: Attest build provenance
-        uses: actions/attest-build-provenance@v2
+        uses: actions/attest-build-provenance@v4
         with:
           subject-path: wifi_addon.zip
 
       - name: Upload artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
-          name: wifi_addon
+          name: wifi_addon_artifact
           path: wifi_addon.zip
 
       - name: Release
