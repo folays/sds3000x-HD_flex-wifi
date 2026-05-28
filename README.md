@@ -1,6 +1,6 @@
 # sds3000x-HD_flex-wifi
 
-WiFi addon for Siglent SDS3000X-HD oscilloscopes. Adds WiFi connectivity via a USB dongle using the MT7610U chipset (e.g. Panda Wireless PAU0A AC600).
+WiFi addon for [Siglent SDS3000X-HD](https://www.siglenteu.com/digital-oscilloscopes/sds3000x-hd-digital-storage-oscilloscope/) oscilloscopes. Adds WiFi connectivity via a USB dongle using the MT7610U chipset (e.g. Panda Wireless PAU0A AC600).
 
 ## Download
 
