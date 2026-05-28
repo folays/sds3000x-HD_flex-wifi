@@ -8,7 +8,7 @@ WiFi addon for Siglent SDS3000X-HD oscilloscopes. Adds WiFi connectivity via a U
   ```bash
   gh attestation verify wifi_addon.zip --repo folays/sds3000x-HD_flex-wifi
   ```
-  Or rebuild from source yourself (`docker build` / `podman build`) and compare SHA256.
+  You can also verify without `gh`: compare `sha256sum wifi_addon.zip` with the hash shown in the [CI build log](https://github.com/folays/sds3000x-HD_flex-wifi/actions). Or rebuild from source yourself (`docker build` / `podman build`) and compare.
 
 - **[FLEX_WIFI.ADS](https://github.com/folays/sds3000x-HD_flex-wifi/releases/latest/download/FLEX_WIFI.ADS)** — the ZIP above wrapped in Siglent's .ADS firmware format, ready to upload to the scope.
 
