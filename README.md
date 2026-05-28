@@ -2,6 +2,22 @@
 
 WiFi addon for Siglent SDS3000X-HD oscilloscopes. Adds WiFi connectivity via a USB dongle using the MT7610U chipset (e.g. Panda Wireless PAU0A AC600).
 
+## Why MT7610U?
+
+The SDS3000X-HD runs Linux 5.10 (aarch64). This severely limits the choice of USB WiFi chipsets:
+
+- **RTL8192CU** (Realtek): driver exists in 5.10 (`rtl8xxxu`), but terrible radio performance and range. Unusable in practice.
+- **RTL8811CU** (Realtek): no mainline driver until kernel 6.12 (`rtw88`). Many "MT7610U" dongles have been silently switched to this chipset by manufacturers — they look identical but won't work on 5.10. For example, the Edimax EW-7811ULC is advertised as MT7610U but now ships with an RTL8811CU (USB ID `7392:c811`).
+- **MT7921AU** (MediaTek, WiFi 6E): excellent chip, but the driver requires backporting from kernel 5.19+. Works but needs a large patchset and bulky dongles (MIMO antennas).
+- **MT7610U** (MediaTek, AC600): driver `mt76x0u` is **native in kernel 5.10**, no backport needed. Dual-band 2.4/5 GHz, good range, compact dongle form factor.
+
+MT7610U is the only chipset that is both natively supported in kernel 5.10 and available in a compact, well-performing dongle. The Panda Wireless PAU0A AC600 is one of the few dongles still guaranteed to ship with a genuine MT7610U — most competitors have silently swapped to Realtek chips.
+
+See also:
+- [USB WiFi chipsets — what to look for](https://github.com/morrownr/USB-WiFi/blob/main/home/USB_WiFi_Chipsets.md)
+- [USB WiFi adapters supported with Linux in-kernel drivers](https://github.com/morrownr/USB-WiFi/blob/main/home/USB_WiFi_Adapters_that_are_supported_with_Linux_in-kernel_drivers.md)
+- [Linux Mint forum — recommended WiFi adapters](https://forums.linuxmint.com/viewtopic.php?t=405457)
+
 ## Compatible dongles
 
 Any USB WiFi dongle supported by the Linux `mt76x0u` driver (kernel 5.10):
